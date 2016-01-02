@@ -1,6 +1,6 @@
 package net.famcash.doogulshooter.doogulshooter.counter;
 
-import android.support.v4.app.Fragment;
+//import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -11,8 +11,9 @@ import android.widget.Button;
 
 import net.famcash.doogulshooter.doogulshooter.DSActivity;
 import net.famcash.doogulshooter.doogulshooter.DSBaseFragment;
-import net.famcash.doogulshooter.doogulshooter.R;
 import net.famcash.doogulshooter.doogulshooter.engine.GameEngine;
+import net.famcash.doogulshooter.doogulshooter.R;
+
 //import net.famcash.doogulshooter.doogulshooter.counter.GameFragment;
 
 /**
