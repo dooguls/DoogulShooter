@@ -1,20 +1,24 @@
 package net.famcash.doogulshooter.doogulshooter.counter;
 
 import android.support.v4.app.Fragment;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-//import net.famcash.doogulshooter.doogulshooter.DSActivity;
+import net.famcash.doogulshooter.doogulshooter.DSActivity;
+import net.famcash.doogulshooter.doogulshooter.DSBaseFragment;
 import net.famcash.doogulshooter.doogulshooter.R;
 import net.famcash.doogulshooter.doogulshooter.engine.GameEngine;
+//import net.famcash.doogulshooter.doogulshooter.counter.GameFragment;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class GameFragment extends Fragment {
+public class GameFragment extends DSBaseFragment implements View.OnClickListener {
 
     private GameEngine mGameEngine;
 
@@ -34,6 +38,7 @@ public class GameFragment extends Fragment {
         mGameEngine.addGameObject(new ScoreGameObject(view, R.id.txt_score));
         view.findViewById(R.id.btn_start_stop).setOnClickListener(this);
         view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
+        mGameEngine.startGame();
     }
 
     @Override

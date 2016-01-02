@@ -3,7 +3,7 @@ package net.famcash.doogulshooter.doogulshooter.engine;
 /**
  * Created by dooguls on 11/8/15.
  */
-public class UpdateThread {
+public class UpdateThread extends Thread{
 
     private final GameEngine mGameEngine;
     private boolean mGameIsRunning = true;
