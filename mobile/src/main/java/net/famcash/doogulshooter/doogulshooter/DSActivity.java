@@ -29,7 +29,12 @@ public class DSActivity extends Activity {
 
     public void startGame() {
         // Navigate teh game fragment, which makes the start automatically
-        navigateToFragment(new GameFragment());
+        //navigateToFragment(new GameFragment());
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new GameFragment(), TAG_FRAGMENT)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void navigateToFragment(DSBaseFragment dst) {

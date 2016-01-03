@@ -34,4 +34,12 @@ public class MainMenuFragment extends DSBaseFragment implements View.OnClickList
     public void onClick(View v) {
         ((DSActivity)getActivity()).startGame();
     }
+
+   /* public void startGame() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new GameFragment(), TAG_FRAGMENT)
+                .addToBackStack(null)
+                .commit();
+    }*/
 }

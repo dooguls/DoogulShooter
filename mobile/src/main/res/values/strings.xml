@@ -8,5 +8,7 @@
     <string name="stop">Stop</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
+    <string name="pause_dialog_title">Pause Dialog Title</string>
+    <string name="pause_dialog_message">Pause Dialog message</string>
     <string name="game_title">DoogulShooter - Space Shooter</string>
 </resources>
