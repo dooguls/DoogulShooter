@@ -2,6 +2,8 @@ package net.famcash.doogulshooter.doogulshooter.engine;
 
 import android.app.Activity;
 
+import net.famcash.doogulshooter.doogulshooter.input.InputController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,11 @@ public class GameEngine {
     private UpdateThread mUpdateThread;
     private DrawThread mDrawThread;
     private Activity mActivity;
+
+    public InputController mInputController;
+    public void setInputController(InputController controller) {
+        mInputController = controller;
+    }
 
     public GameEngine (Activity a) {
         mActivity = a;

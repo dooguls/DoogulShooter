@@ -5,15 +5,20 @@ import android.util.Log;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 
 import net.famcash.doogulshooter.doogulshooter.DSActivity;
 import net.famcash.doogulshooter.doogulshooter.DSBaseFragment;
 import net.famcash.doogulshooter.doogulshooter.engine.GameEngine;
 import net.famcash.doogulshooter.doogulshooter.R;
+import net.famcash.doogulshooter.doogulshooter.movement.Player;
+import net.famcash.doogulshooter.doogulshooter.input.InputController;
+import net.famcash.doogulshooter.doogulshooter.input.VirtualJoystickInputController;
 
 //import net.famcash.doogulshooter.doogulshooter.counter.GameFragment;
 
@@ -39,9 +44,27 @@ public class GameFragment extends DSBaseFragment implements View.OnClickListener
         super.onViewCreated(view,savedInstanceState);
         mGameEngine = new GameEngine(getActivity());
         mGameEngine.addGameObject(new ScoreGameObject(view, R.id.txt_score));
-        view.findViewById(R.id.btn_start_stop).setOnClickListener(this);
+        //view.findViewById(R.id.btn_start_stop).setOnClickListener(this);
         view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
-        mGameEngine.startGame();
+        final ViewTreeObserver obs = view.getViewTreeObserver();
+        obs.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    obs.removeGlobalOnLayoutListener(this);
+                }
+                else {
+                    obs.removeOnGlobalLayoutListener(this);
+                }
+                mGameEngine = new GameEngine(getActivity());
+                mGameEngine.setInputController(new VirtualJoystickInputController(getView()));
+                mGameEngine.addGameObject(new Player(getView()));
+                mGameEngine.startGame();
+            }
+        });
+        //mGameEngine.setInputController(new InputController());
+        //mGameEngine.addGameObject(new Player(getView()));
+        //mGameEngine.startGame();
     }
 
     @Override
@@ -50,9 +73,9 @@ public class GameFragment extends DSBaseFragment implements View.OnClickListener
            // playOrPause();
             pauseGameAndShowPauseDialog();
         }
-        if (v.getId() == R.id.btn_start_stop) {
+        /*if (v.getId() == R.id.btn_start_stop) {
             startOrStop();
-        }
+        }*/
     }
 
     private void pauseGameAndShowPauseDialog() {
@@ -100,7 +123,7 @@ public class GameFragment extends DSBaseFragment implements View.OnClickListener
 
     private void startOrStop() {
         Log.d(TAG, "Made it to startOrStop");
-        Button button = (Button) getView().findViewById(R.id.btn_start_stop);
+        //Button button = (Button) getView().findViewById(R.id.btn_start_stop);
         Button playPauseButton = (Button) getView().findViewById(R.id.btn_play_pause);
         if(mGameEngine.isRunning()) {
             mGameEngine.stopGame();
@@ -109,13 +132,13 @@ public class GameFragment extends DSBaseFragment implements View.OnClickListener
             //button.setText(R.string.start);
             //playPauseButton.setEnabled(false);
         }
-        else {
+        /*else {
             Log.d(TAG, "I shouldn't end up in the elese of startOrStop");
             mGameEngine.startGame();
             button.setText(R.string.stop);
             playPauseButton.setEnabled(true);
             playPauseButton.setText(R.string.pause);
-        }
+        }*/
     }
 
     @Override
